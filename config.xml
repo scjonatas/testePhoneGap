@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns       = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "org.coenraets.employeedirectory"
+        id          = "br.com.perfilvirtual.testePhoneGap"
         versionCode = "10"
         version     = "1.1.0">
  
-    <name>Employee Directory</name>
+    <name>Testando o PhoneGap</name>
  
     <description>
-        A simple employee directory application
+        App para testar o PhoneGap
     </description>
  
     <author href="http://www.facebook.com/scjonatas" email="scjonatas@gmail.com">
         Jonatas Correia
     </author>
  
+	<feature name="http://api.phonegap.com/1.0/device" />
     <feature name="http://api.phonegap.com/1.0/camera"/>
     <feature name="http://api.phonegap.com/1.0/contacts"/>
     <feature name="http://api.phonegap.com/1.0/file"/>
