@@ -42,6 +42,7 @@ function onDeviceReady() {
 	db = window.openDatabase("database", "1.0", "Banco de Teste", 200000);
 	
 	if (dbCreated) {
+		$("#content").html("Testando o PhoneGap")
 		db.transaction(queryDB, errorCB);
 	}
 	else {
