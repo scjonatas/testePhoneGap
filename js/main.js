@@ -6,7 +6,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 // Populate the database
 function populateDB(tx) {
-//	tx.executeSql('DROP TABLE IF EXISTS teste');
+	tx.executeSql('DROP TABLE IF EXISTS teste');
 	tx.executeSql('CREATE TABLE IF NOT EXISTS teste (id INTEGER PRIMARY KEY AUTOINCREMENT, data VARCHAR(50))');
 	tx.executeSql('INSERT INTO teste (id, data) VALUES (NULL, "First row")');
 	tx.executeSql('INSERT INTO teste (id, data) VALUES (NULL, "Second row")');
@@ -43,9 +43,11 @@ function onDeviceReady() {
 	$("#content").html("Testando o PhoneGap");
 	
 	if (dbCreated) {
+		alert("Buscando dados!");
 		db.transaction(queryDB, errorCB);
 	}
 	else {
+		alert("Inserindo dados no banco");
 		db.transaction(populateDB, errorCB, successCB);
 	}
 }
