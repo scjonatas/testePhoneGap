@@ -1,6 +1,49 @@
-// phonegap ready
-document.addEventListener("deviceready", ready, false);
+var db;
+var dbCreated = false;
 
-function ready() {
-	$("#content").html("Hello, World! Demo  JQuery Mobile com PhoneGap 2!");
+// Wait for device API libraries to load
+document.addEventListener("deviceready", onDeviceReady, false);
+
+// Populate the database
+function populateDB(tx) {
+//	tx.executeSql('DROP TABLE IF EXISTS DEMO');
+	tx.executeSql('CREATE TABLE IF NOT EXISTS teste (id INTEGER PRIMARY KEY AUTOINCREMENT, data VARCHAR(50))');
+	tx.executeSql('INSERT INTO DEMO (id, data) VALUES (NULL, "First row")');
+	tx.executeSql('INSERT INTO DEMO (id, data) VALUES (NULL, "Second row")');
+}
+
+// Query the database
+function queryDB(tx) {
+	tx.executeSql('SELECT * FROM teste', [], querySuccess, errorCB);
+}
+
+// Query the success callback
+function querySuccess(tx, results) {
+	var len = results.rows.length;
+	console.log("teste table: " + len + " rows found.");
+	for (var i = 0; i < len; i++) {
+		console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+	}
+}
+
+// Transaction error callback
+function errorCB(err) {
+	console.log("Error processing SQL: " + err.code);
+}
+
+// Transaction success callback
+function successCB() {
+	db.transaction(queryDB, errorCB);
+}
+
+// device APIs are available
+function onDeviceReady() {
+	db = window.openDatabase("database", "1.0", "Banco de Teste", 200000);
+	
+	if (dbCreated) {
+		db.transaction(queryDB, errorCB);
+	}
+	else {
+		db.transaction(populateDB, errorCB, successCB);
+	}
 }
