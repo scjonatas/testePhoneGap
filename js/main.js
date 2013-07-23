@@ -6,10 +6,10 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 // Populate the database
 function populateDB(tx) {
-//	tx.executeSql('DROP TABLE IF EXISTS DEMO');
+//	tx.executeSql('DROP TABLE IF EXISTS teste');
 	tx.executeSql('CREATE TABLE IF NOT EXISTS teste (id INTEGER PRIMARY KEY AUTOINCREMENT, data VARCHAR(50))');
-	tx.executeSql('INSERT INTO DEMO (id, data) VALUES (NULL, "First row")');
-	tx.executeSql('INSERT INTO DEMO (id, data) VALUES (NULL, "Second row")');
+	tx.executeSql('INSERT INTO teste (id, data) VALUES (NULL, "First row")');
+	tx.executeSql('INSERT INTO teste (id, data) VALUES (NULL, "Second row")');
 }
 
 // Query the database
