@@ -29,6 +29,7 @@ function querySuccess(tx, results) {
 // Transaction error callback
 function errorCB(err) {
 	alert("Error processing SQL: " + err.code);
+	alert(err.message);
 }
 
 // Transaction success callback
