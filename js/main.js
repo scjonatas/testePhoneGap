@@ -33,7 +33,7 @@ function error(err) {
 
 // Transaction success callback
 function dbCreated() {
-	window.localStorage.setItem("dbCreated", 1);
+	window.localStorage.setItem("dbCreated", "1");
 	db.transaction(queryDb, error);
 }
 
@@ -43,6 +43,7 @@ function onDeviceReady() {
 
 	db = window.openDatabase("database", "1.0", "Banco de Teste", 200000);
 	
+	alert("key0: " + window.localStorage.key(0));
 	var dbCreated = window.localStorage.getItem("dbCreated");
 	if (dbCreated) {
 		alert("Buscando dados!");
