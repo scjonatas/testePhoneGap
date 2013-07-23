@@ -13,11 +13,11 @@ function populateDb(tx) {
 
 // Query the database
 function queryDb(tx) {
-	tx.executeSql('SELECT * FROM teste', [], querySuccess, error);
+	tx.executeSql('SELECT * FROM teste', [], onQuerySuccess, onError);
 }
 
 // Query the success callback
-function querySuccess(tx, results) {
+function onQuerySuccess(tx, results) {
 	var len = results.rows.length;
 	alert("teste table: " + len + " rows found.");
 	for (var i = 0; i < len; i++) {
@@ -26,15 +26,15 @@ function querySuccess(tx, results) {
 }
 
 // Transaction error callback
-function error(err) {
+function onError(err) {
 	alert("Error processing SQL: " + err.code);
 	alert(err.message);
 }
 
 // Transaction success callback
-function dbCreated() {
+function onDbCreated() {
 	window.localStorage.setItem("dbCreated", "1");
-	db.transaction(queryDb, error);
+	db.transaction(queryDb, onError);
 }
 
 // device APIs are available
@@ -42,17 +42,15 @@ function onDeviceReady() {
 	$.mobile.defaultPageTransition = "pop";
 
 	db = window.openDatabase("database", "1.0", "Banco de Teste", 200000);
-	
-	for (var i = 0; i < window.localStorage.keys().length; i++) {
-		alert("key[" + i + "]: " + window.localStorage.key(i));
-	}
+
 	var dbCreated = window.localStorage.getItem("dbCreated");
+	alert("dbCreated = " + dbCreated);
 	if (dbCreated) {
 		alert("Buscando dados!");
-		db.transaction(queryDb, error);
+		db.transaction(queryDb, onError);
 	}
 	else {
 		alert("Inserindo dados no banco");
-		db.transaction(populateDb, error, dbCreated);
+		db.transaction(populateDb, onError, dbCreated);
 	}
 }
