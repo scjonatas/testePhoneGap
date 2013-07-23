@@ -39,8 +39,10 @@ function successCB() {
 
 // device APIs are available
 function onDeviceReady() {
+	$.mobile.defaultPageTransition = "pop";
+
 	db = window.openDatabase("database", "1.0", "Banco de Teste", 200000);
-	
+
 	if (dbCreated) {
 		alert("Buscando dados!");
 		db.transaction(queryDB, errorCB);
