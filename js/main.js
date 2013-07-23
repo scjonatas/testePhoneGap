@@ -1,20 +1,19 @@
 var db;
-var dbCreated = false;
 
 // Wait for device API libraries to load
 document.addEventListener("deviceready", onDeviceReady, false);
 
 // Populate the database
-function populateDB(tx) {
-	tx.executeSql('DROP TABLE IF EXISTS teste');
+function populateDb(tx) {
+//	tx.executeSql('DROP TABLE IF EXISTS teste');
 	tx.executeSql('CREATE TABLE IF NOT EXISTS teste (id INTEGER PRIMARY KEY AUTOINCREMENT, data VARCHAR(50))');
 	tx.executeSql('INSERT INTO teste (id, data) VALUES (NULL, "First row")');
 	tx.executeSql('INSERT INTO teste (id, data) VALUES (NULL, "Second row")');
 }
 
 // Query the database
-function queryDB(tx) {
-	tx.executeSql('SELECT * FROM teste', [], querySuccess, errorCB);
+function queryDb(tx) {
+	tx.executeSql('SELECT * FROM teste', [], querySuccess, error);
 }
 
 // Query the success callback
@@ -27,14 +26,15 @@ function querySuccess(tx, results) {
 }
 
 // Transaction error callback
-function errorCB(err) {
+function error(err) {
 	alert("Error processing SQL: " + err.code);
 	alert(err.message);
 }
 
 // Transaction success callback
-function successCB() {
-	db.transaction(queryDB, errorCB);
+function dbCreated() {
+	window.localStorage.setItem("dbCreated", 1);
+	db.transaction(queryDb, error);
 }
 
 // device APIs are available
@@ -42,13 +42,14 @@ function onDeviceReady() {
 	$.mobile.defaultPageTransition = "pop";
 
 	db = window.openDatabase("database", "1.0", "Banco de Teste", 200000);
-
+	
+	var dbCreated = window.localStorage.getItem("dbCreated");
 	if (dbCreated) {
 		alert("Buscando dados!");
-		db.transaction(queryDB, errorCB);
+		db.transaction(queryDb, error);
 	}
 	else {
 		alert("Inserindo dados no banco");
-		db.transaction(populateDB, errorCB, successCB);
+		db.transaction(populateDb, error, dbCreated);
 	}
 }
