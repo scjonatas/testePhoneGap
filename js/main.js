@@ -43,7 +43,9 @@ function onDeviceReady() {
 
 	db = window.openDatabase("database", "1.0", "Banco de Teste", 200000);
 	
-	alert("key0: " + window.localStorage.key(0));
+	for (var i = 0; i < window.localStorage.keys().length; i++) {
+		alert("key[" + i + "]: " + window.localStorage.key(i));
+	}
 	var dbCreated = window.localStorage.getItem("dbCreated");
 	if (dbCreated) {
 		alert("Buscando dados!");
