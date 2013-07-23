@@ -20,15 +20,15 @@ function queryDB(tx) {
 // Query the success callback
 function querySuccess(tx, results) {
 	var len = results.rows.length;
-	console.log("teste table: " + len + " rows found.");
+	alert("teste table: " + len + " rows found.");
 	for (var i = 0; i < len; i++) {
-		console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+		alert("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
 	}
 }
 
 // Transaction error callback
 function errorCB(err) {
-	console.log("Error processing SQL: " + err.code);
+	alert("Error processing SQL: " + err.code);
 }
 
 // Transaction success callback
