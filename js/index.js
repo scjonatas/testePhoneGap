@@ -50,7 +50,11 @@ function onDeviceReady() {
 	}
 	else {
 		alert("Inserindo dados no banco");
-		window.localStorage.setItem("dbCreated", "1");
+		window.localStorage.setItem("dbCreated", 2);
 		db.transaction(populateDb, onError, dbCreated);
 	}
+}
+
+function testIndex() {
+	alert("opa!");
 }
