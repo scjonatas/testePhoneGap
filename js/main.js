@@ -40,7 +40,6 @@ function successCB() {
 // device APIs are available
 function onDeviceReady() {
 	db = window.openDatabase("database", "1.0", "Banco de Teste", 200000);
-	$("#content").html("Testando o PhoneGap");
 	
 	if (dbCreated) {
 		alert("Buscando dados!");
