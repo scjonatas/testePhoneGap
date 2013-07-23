@@ -33,7 +33,6 @@ function onError(err) {
 
 // Transaction success callback
 function onDbCreated() {
-	window.localStorage.setItem("dbCreated", "1");
 	db.transaction(queryDb, onError);
 }
 
@@ -51,6 +50,7 @@ function onDeviceReady() {
 	}
 	else {
 		alert("Inserindo dados no banco");
+		window.localStorage.setItem("dbCreated", "1");
 		db.transaction(populateDb, onError, dbCreated);
 	}
 }
