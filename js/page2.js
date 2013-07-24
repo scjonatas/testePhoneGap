@@ -7,7 +7,7 @@ function onGetServicosSuccess(tx, results) {
 	$('#list li').remove();
 	
 	for (var i = 0; i < results.rows.length; i++) {
-		$('#list').append('<li>' + results.rows.item(i).data + '</li>');
+		$('#list').append('<li><a href="#contato">' + results.rows.item(i).data + '</a></li>');
 		$('#list').listview('refresh');
 	}
 }
