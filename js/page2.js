@@ -19,4 +19,8 @@ $("#page2").bind("pageshow", function() {
 
 $("#page2").bind("pageinit", function() {
 	db.transaction(getServicos, onError);
+	
+	$.get("http://www.chronospace.com.br/testeperfil/teste.php", {param: "Eu estou testando!!"}, function(data) {
+		alert("Mensagem do servidor: " + data);
+	});
 });
