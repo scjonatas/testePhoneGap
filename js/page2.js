@@ -3,19 +3,6 @@ function getServicos(tx) {
 	tx.executeSql('SELECT * FROM teste', [], onGetServicosSuccess, onError);
 }
 
-function getServicos() {
-	$('#list li').remove();
-	employees = data.items;
-	$.each(employees, function(index, employee) {
-		$('#employeeList').append('<li><a href="employeedetails.html?id=' + employee.id + '">' +
-				'<img src="pics/' + employee.picture + '"/>' +
-				'<h4>' + employee.firstName + ' ' + employee.lastName + '</h4>' +
-				'<p>' + employee.title + '</p>' +
-				'<span class="ui-li-count">' + employee.reportCount + '</span></a></li>');
-		$('#employeeList').listview('refresh');
-	});
-}
-
 function onGetServicosSuccess(tx, results) {
 	$('#list li').remove();
 	
