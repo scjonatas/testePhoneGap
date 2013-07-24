@@ -54,7 +54,3 @@ function onDeviceReady() {
 		db.transaction(populateDb, onError, dbCreated);
 	}
 }
-
-function testIndex() {
-	alert("opa!");
-}
